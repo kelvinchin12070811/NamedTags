@@ -55,4 +55,17 @@ namespace named_tags
 
 	/** @} */
 	/** @} */ //group
+
+	// Specialization of acceptSerializer for std::string
+	template <>
+	void WrapperTag<std::string>::acceptSerializer(const std::string& name, Serializer* engine)
+	{
+		engine->accept(name, data);
+	}
+
+	template <>
+	void WrapperTag<std::byte>::acceptSerializer(const std::string& name, Serializer* engine)
+	{
+		engine->accept(name, data);
+	}
 }

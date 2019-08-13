@@ -28,7 +28,7 @@ namespace named_tags
 
 	TagBase* CompoundTag::insert(std::string id, std::unique_ptr<TagBase> tag)
 	{
-		auto result = tree.insert({ id, std::move(tag) });
+		auto result = tree.insert({ std::move(id), std::move(tag) });
 		return result.first->second.get();
 	}
 	
@@ -68,6 +68,14 @@ namespace named_tags
 	const std::map<std::string, std::unique_ptr<TagBase>>& CompoundTag::each() const
 	{
 		return tree;
+	}
+
+	void CompoundTag::acceptSerializer(const std::string& name, Serializer* engine)
+	{
+		engine->treeStart(name);
+		for (auto&& [id, tag] : tree)
+			tag->acceptSerializer(id, engine);
+		engine->treeEnd(name);
 	}
 
 	decltype(CompoundTag::tree)::iterator CompoundTag::begin()

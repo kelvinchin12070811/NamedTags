@@ -55,6 +55,15 @@ namespace named_tags
 			return *this;
 		}
 
+		void acceptSerializer(const std::string& name, Serializer* engine) override
+		{
+			engine->arrayStart(name);
+			for (size_t itr{ 0 }; itr < this->size(); itr++)
+			{
+				engine->accept(std::to_string(itr), (*this)[itr]);
+			}
+			engine->arrayEnd(name);
+		}
 	private:
 		ArrayTag() = default;
 	};

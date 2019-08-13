@@ -6,17 +6,22 @@
 namespace named_tags
 {
 	/**
+	 * @addtogroup tags
+	 * @{
+	 */
+	/**
 	 * @brief The foundation type of all tags
 	 */
 	class TagBase
-	{
+	{ /** @} */
 	public:
 		virtual ~TagBase() = 0;
 		/**
 		 * Accept a serializer for serialize or deserialize.
-		 * 
+		 * @param name Name of current tag.
+		 * @param engine Serializer engine to use.
 		 */
-		virtual void acceptSerializer(std::string name, Serializer& engine);
+		virtual void acceptSerializer(const std::string& name, Serializer* engine) = 0;
 
 		/** Convert TagBase to targeted tag. */
 		template <typename T>

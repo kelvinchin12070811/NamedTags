@@ -68,6 +68,8 @@ namespace named_tags
 		/** Get constant reference to the tree for foreach loop. */
 		const std::map<std::string, std::unique_ptr<TagBase>>& each() const;
 
+		void acceptSerializer(const std::string& name, Serializer* engine) override;
+
 		/**
 		 * @name Iterator
 		 * @{

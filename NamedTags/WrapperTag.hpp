@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <iostream>
 #include <memory>
 #include <type_traits>
@@ -57,6 +58,12 @@ namespace named_tags
 			return data;
 		}
 
+		void acceptSerializer(const std::string& name, Serializer* engine) override
+		{
+			static_assert(std::numeric_limits<T>::is_specialized,
+				"Non built in numeric data type must specialize this function");
+			engine->accept(name, data);
+		}
 	private:
 		WrapperTag(T data = T{}):
 			data(data)
