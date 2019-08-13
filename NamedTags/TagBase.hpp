@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <typeindex>
 #include <type_traits>
 #include "Serializer.hpp"
 
@@ -22,6 +23,8 @@ namespace named_tags
 		 * @param engine Serializer engine to use.
 		 */
 		virtual void acceptSerializer(const std::string& name, Serializer* engine) = 0;
+		/** Get tag type via typeid. */
+		virtual std::type_index tagType() = 0;
 
 		/** Convert TagBase to targeted tag. */
 		template <typename T>

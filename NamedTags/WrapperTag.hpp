@@ -64,6 +64,11 @@ namespace named_tags
 				"Non built in numeric data type must specialize this function");
 			engine->accept(name, data);
 		}
+
+		std::type_index tagType() override
+		{
+			return typeid(WrapperTag<T>);
+		}
 	private:
 		WrapperTag(T data = T{}):
 			data(data)

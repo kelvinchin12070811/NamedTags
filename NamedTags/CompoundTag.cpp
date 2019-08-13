@@ -78,6 +78,11 @@ namespace named_tags
 		engine->treeEnd(name);
 	}
 
+	std::type_index CompoundTag::tagType()
+	{
+		return typeid(CompoundTag);
+	}
+
 	decltype(CompoundTag::tree)::iterator CompoundTag::begin()
 	{
 		return tree.begin();

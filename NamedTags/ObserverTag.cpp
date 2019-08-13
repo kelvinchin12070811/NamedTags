@@ -26,6 +26,11 @@ namespace named_tags
 	{
 		tag->acceptSerializer(name, engine);
 	}
+
+	std::type_index ObserverTag::tagType()
+	{
+		return typeid(ObserverTag);
+	}
 	
 	ObserverTag::ObserverTag(TagBase* tag):
 		tag(tag)

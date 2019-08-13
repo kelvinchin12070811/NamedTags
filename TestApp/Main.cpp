@@ -9,10 +9,7 @@ int main(int argc, char** argv)
 {
 	try
 	{
-		auto ctag = named_tags::CompoundTag::create({
-			{ "test", named_tags::StringTag::create("Hello my friend") },
-			{ "test2", named_tags::FloatTag::create(3.142f) }
-		});
+		auto ctag = named_tags::CompoundTag::create();
 		auto tag = ctag->insert("int", named_tags::IntTag::create(12));
 		auto tag2 = ctag->insert("str", named_tags::StringTag::create("Hello World"));
 
@@ -20,11 +17,10 @@ int main(int argc, char** argv)
 
 		cout << tag->as<named_tags::IntTag>() << endl;
 
-
 		cout << arrayTag->size() << endl;
 
 		cout << ctag->get("test")->as<named_tags::StringTag>() << endl;
-
+		cout << (ctag->get("test")->tagType() == typeid(named_tags::IntTag)) << endl;
 		for (auto&& itr : arrayTag->each())
 		{
 			cout << itr << endl;

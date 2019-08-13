@@ -69,6 +69,7 @@ namespace named_tags
 		const std::map<std::string, std::unique_ptr<TagBase>>& each() const;
 
 		void acceptSerializer(const std::string& name, Serializer* engine) override;
+		std::type_index tagType() override;
 
 		/**
 		 * @name Iterator

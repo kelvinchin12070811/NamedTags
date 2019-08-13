@@ -64,6 +64,11 @@ namespace named_tags
 			}
 			engine->arrayEnd(name);
 		}
+
+		std::type_index tagType() override
+		{
+			return typeid(ArrayTag<T>);
+		}
 	private:
 		ArrayTag() = default;
 	};

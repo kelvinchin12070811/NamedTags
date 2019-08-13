@@ -28,6 +28,7 @@ namespace named_tags
 		const TagBase* get() const;
 
 		void acceptSerializer(const std::string& name, Serializer* engine) override;
+		std::type_index tagType() override;
 	private:
 		ObserverTag(TagBase* tag);
 		TagBase* tag{ nullptr };
