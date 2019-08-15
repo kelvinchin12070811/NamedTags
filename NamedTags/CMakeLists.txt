@@ -7,6 +7,8 @@ SET(SRCS
 	json.hpp
 	JsonSerializer.hpp
 	JsonSerializer.cpp
+	JsonSerializerPrivate.hpp
+	JsonSerializerPrivate.cpp
 	ObserverTag.hpp
 	ObserverTag.cpp
 	Serializer.hpp

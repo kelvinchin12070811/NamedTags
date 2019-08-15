@@ -8,13 +8,19 @@ namespace named_tags
 	 * @{
 	 */
 	/**
-	 * @brief Serializer base class.
+	 * @brief Static serializer base class.
 	 * A bidirectional serializer base class for all serializer and deserializer.
 	 */
 	class Serializer
 	{ /** @} */
 	public:
+		Serializer() = default;
+		Serializer(const Serializer&) = default;
+		Serializer(Serializer&&) noexcept = default;
+		Serializer& operator=(const Serializer&) = default;
+		Serializer& operator=(Serializer&&) noexcept = default;
 		virtual ~Serializer() = 0;
+
 		/** Called when start to parse a tree. */
 		virtual void treeStart(const std::string& name) = 0;
 		/** Called when end to parse a tree. */
