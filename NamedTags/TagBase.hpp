@@ -34,6 +34,35 @@ namespace named_tags
 			assert((ptr == nullptr ? 0 : 1));
 			return ptr;
 		}
+		/** Convert TagBase to targeted tag. Const version */
+		template <typename T>
+		typename std::enable_if<!std::is_same<T, TagBase>::value, const T*>::type as() const
+		{
+			auto ptr = dynamic_cast<const T*>(this);
+			assert((ptr == nullptr ? 0 : 1));
+			return ptr;
+		}
+		
+		/**
+		 * Convert TagBase to targeted tag statically.
+		 * @warning This function might cause undefined behaviour if casted to wrong data type.
+		 */
+		template <typename T>
+		typename std::enable_if<!std::is_same<T, TagBase>::value, T*>::type staticAs()
+		{
+			static_assert(std::is_base_of<TagBase, T>::value, "T must be a child of TagBase.");
+			return static_cast<T*>(this);
+		}
+		/**
+		 * Convert TagBase to targeted tag statically. Const version
+		 * @warning This function might cause undefined behaviour if casted to wrong data type.
+		 */
+		template <typename T>
+		typename std::enable_if<!std::is_same<T, TagBase>::value, const T*>::type staticAs() const
+		{
+			static_assert(std::is_base_of<TagBase, T>::value, "T must be a child of TagBase.");
+			return static_cast<const T*>(this);
+		}
 	};
 	inline TagBase::~TagBase() = default;
 }
