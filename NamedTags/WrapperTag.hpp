@@ -80,19 +80,19 @@ namespace named_tags
 }
 
 template <typename T>
-std::ostream& operator<<(std::ostream& lhs, named_tags::WrapperTag<T>& rhs)
+std::ostream& operator<<(std::ostream& lhs, const named_tags::WrapperTag<T>& rhs)
 {
 	return lhs << rhs.get();
 }
 
 template <typename T>
-std::ostream& operator<<(std::ostream& lhs, named_tags::WrapperTag<T>* rhs)
+std::ostream& operator<<(std::ostream& lhs, const named_tags::WrapperTag<T>* rhs)
 {
 	return lhs << *rhs;
 }
 
 template <typename T>
-std::ostream& operator<<(std::ostream& lhs, std::unique_ptr<named_tags::WrapperTag<T>>& rhs)
+std::ostream& operator<<(std::ostream& lhs, const std::unique_ptr<named_tags::WrapperTag<T>>& rhs)
 {
 	return lhs << *rhs;
 }
@@ -113,4 +113,25 @@ template <typename T>
 std::istream& operator>>(std::istream& lhs, std::unique_ptr<named_tags::WrapperTag<T>>& rhs)
 {
 	return lhs >> *rhs;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& lhs, const named_tags::WrapperTag<T>& rhs)
+{
+	static_assert(false, "const tag can't use as input");
+	return lhs;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& lhs, const named_tags::WrapperTag<T>* rhs)
+{
+	static_assert(false, "const tag can't use as input");
+	return lhs;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& lhs, const std::unique_ptr<named_tags::WrapperTag<T>>& rhs)
+{
+	static_assert(false, "const tag can't use as input");
+	return lhs;
 }
