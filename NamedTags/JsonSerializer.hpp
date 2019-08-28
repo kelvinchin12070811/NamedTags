@@ -14,7 +14,7 @@ namespace named_tags
 	 * @{
 	 */
 	/**
-	 * @brief Serialize to json data.
+	 * @brief Statically serialize NBT data to json data.
 	 */
 	class JsonSerializer : public Serializer
 	{ /** @} */
@@ -35,8 +35,10 @@ namespace named_tags
 
 		void treeStart(const std::string& name) override;
 		void treeEnd(const std::string& name) override;
-		void arrayStart(const std::string& name) override;
+		void arrayStart(const std::string& name, size_t length) override;
 		void arrayEnd(const std::string& name) override;
+
+		Serializer::Type serializerType() const override;
 
 		void accept(const std::string& name, bool& value);
 		void accept(const std::string& name, char& value);

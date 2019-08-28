@@ -62,7 +62,15 @@ namespace named_tags
 
 		void acceptSerializer(const std::string& name, Serializer* engine) override
 		{
-			engine->arrayStart(name);
+			engine->arrayStart(name, this->size());
+			
+			if (engine->serializerType() == Serializer::Type::deserial)
+			{
+				this->clear();
+				this->resize(engine->arraySize());
+				this->shrink_to_fit();
+			}
+
 			for (size_t itr{ 0 }; itr < this->size(); itr++)
 			{
 				engine->accept(std::to_string(itr), (*this)[itr]);

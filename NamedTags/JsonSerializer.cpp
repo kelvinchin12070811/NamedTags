@@ -38,7 +38,7 @@ namespace named_tags
 		_data->append(tree.first, tree.second);
 	}
 	
-	void JsonSerializer::arrayStart(const std::string& name)
+	void JsonSerializer::arrayStart(const std::string& name, size_t length)
 	{
 		nlohmann::json value = "[]"_json;
 		_data->trace.push({ name, std::move(value) });
@@ -50,6 +50,11 @@ namespace named_tags
 		auto value = _data->trace.top();
 		_data->trace.pop();
 		_data->append(value.first, value.second);
+	}
+
+	Serializer::Type JsonSerializer::serializerType() const
+	{
+		return Serializer::Type::serial;
 	}
 	
 	void JsonSerializer::accept(const std::string& name, bool& value)
