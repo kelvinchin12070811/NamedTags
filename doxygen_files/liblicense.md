@@ -1,3 +1,7 @@
+# License of the library
+
+This library is licensed under:
+
 Mozilla Public License Version 2.0
 ==================================
 

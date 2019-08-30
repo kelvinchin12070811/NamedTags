@@ -18,6 +18,12 @@ namespace named_tags
 	 */
 	/**
 	 * @brief A wrapper that convert almost any data type into tag.
+	 * 
+	 * WrapperTag allow user to create custom tags easily with provided templated class. A list of
+	 * predefined tags are avaliable at [Common Tags](group__alias__tags.html).
+	 *
+	 * @note All custom tags need to specialize the WrapperTag::acceptSerializer funcion if serialization
+	 * is required.
 	 */
 	template <typename T>
 	class WrapperTag : public TagBase

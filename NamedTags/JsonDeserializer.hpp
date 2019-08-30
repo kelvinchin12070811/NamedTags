@@ -15,7 +15,7 @@ namespace named_tags
 	* @{
 	*/
 	/**
-	* @brief Statically serialize NBT data to json data.
+	* @brief Statically deserialize NBT data from json data.
 	*/
 	class JsonDeserializer : public Serializer
 	{ /** @} */

@@ -15,6 +15,9 @@ namespace named_tags
 	 */
 	/**
 	 * @brief Observe a foregin tag without taking it's ownership.
+	 *
+	 * ObserverTag allow user to link another NBT tree without taking it's ownership. It also redirect the
+	 * static serialization engine to the observed tree for linking the serialization result.
 	 */
 	class ObserverTag : public TagBase
 	{ /** @} */
@@ -31,6 +34,8 @@ namespace named_tags
 		TagBase* get();
 		/** Get constant reference tag. */
 		const TagBase* get() const;
+		/** Determine if the observer tag is observing another tag. */
+		bool isObserving() const;
 
 		void acceptSerializer(const std::string& name, Serializer* engine) override;
 		std::type_index tagType() override;

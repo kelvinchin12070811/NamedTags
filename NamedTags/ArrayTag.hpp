@@ -17,6 +17,8 @@ namespace named_tags
 	 */
 	/**
 	 * @brief Tag that store an array of data.
+	 * @note If a custom type unable to supply default constructor, specialize ArrayTag::acceptSerializer
+	 * function to avoid potential problem.
 	 */
 	template <typename T>
 	class ArrayTag : public TagBase, public std::vector<T>

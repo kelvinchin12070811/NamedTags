@@ -27,6 +27,11 @@ namespace named_tags
 		return tag;
 	}
 
+	bool ObserverTag::isObserving() const
+	{
+		return tag != nullptr;
+	}
+
 	void ObserverTag::acceptSerializer(const std::string& name, Serializer* engine)
 	{
 		tag->acceptSerializer(name, engine);
