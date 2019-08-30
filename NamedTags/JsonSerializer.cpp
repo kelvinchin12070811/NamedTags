@@ -124,6 +124,6 @@ namespace named_tags
 	
 	void JsonSerializer::accept(const std::string& name, std::byte& value)
 	{
-		_data->append(name, std::to_integer<int>(value));
+		_data->append(name, std::to_integer<unsigned int>(value));
 	}
 }

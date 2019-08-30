@@ -4,39 +4,34 @@
 // file, You can obtain one at http ://mozilla.org/MPL/2.0/.
 //***********************************************************************************************************
 #pragma once
+#include <stdexcept>
 #include "Serializer.hpp"
 
 namespace named_tags
 {
-	struct JsonSerializerPrivate;
+	struct JsonDeserializerPrivate;
 	/**
-	 * @addtogroup tags
-	 * @{
-	 */
+	* @addtogroup tags
+	* @{
+	*/
 	/**
-	 * @brief Statically serialize NBT data to json data.
-	 */
-	class JsonSerializer : public Serializer
+	* @brief Statically serialize NBT data to json data.
+	*/
+	class JsonDeserializer : public Serializer
 	{ /** @} */
 	public:
-		JsonSerializer();
-		JsonSerializer(const JsonSerializer&) = default;
-		JsonSerializer(JsonSerializer&&) noexcept = default;
-		JsonSerializer& operator=(const JsonSerializer&) = default;
-		JsonSerializer& operator=(JsonSerializer&&) noexcept = default;
-		~JsonSerializer();
-
-		/**
-		 * Get generated JSON string.
-		 * @param pretty determin if the paser generate the formated string or minified string. Default is
-		 * true
-		 */
-		std::string getJsonStr(bool pretty = true);
+		JsonDeserializer(std::string jsonStr);
+		JsonDeserializer(const JsonDeserializer&) = default;
+		JsonDeserializer(JsonDeserializer&&) noexcept = default;
+		JsonDeserializer& operator=(const JsonDeserializer&) = default;
+		JsonDeserializer& operator=(JsonDeserializer&&) noexcept = default;
+		~JsonDeserializer();
 
 		void treeStart(const std::string& name) override;
 		void treeEnd(const std::string& name) override;
 		void arrayStart(const std::string& name, size_t length) override;
 		void arrayEnd(const std::string& name) override;
+		size_t arraySize() override;
 
 		Serializer::Type serializerType() const override;
 
@@ -55,6 +50,9 @@ namespace named_tags
 		void accept(const std::string& name, int64_t& value);
 		void accept(const std::string& name, std::byte& value);
 	private:
-		JsonSerializerPrivate* _data{ nullptr };
+		std::runtime_error genMessage(const std::string& name, const std::string& type);
+	private:
+		JsonDeserializerPrivate* _data{ nullptr };
+		size_t curArraySz{ 0 };
 	};
 }

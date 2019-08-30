@@ -5,6 +5,10 @@ SET(SRCS
 	CommonTags.hpp
 	CompoundTag.cpp
 	json.hpp
+	JsonDeserializer.hpp
+	JsonDeserializer.cpp
+	JsonDeserializerPrivate.hpp
+	JsonDeserializerPrivate.cpp
 	JsonSerializer.hpp
 	JsonSerializer.cpp
 	JsonSerializerPrivate.hpp

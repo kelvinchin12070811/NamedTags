@@ -3,6 +3,7 @@
 #include <CommonTags.hpp>
 #include <CompoundTag.hpp>
 #include <JsonSerializer.hpp>
+#include <JsonDeserializer.hpp>
 
 using namespace std;
 
@@ -35,6 +36,14 @@ int main(int argc, char** argv)
 
 		cout << endl;
 		named_tags::JsonSerializer engine;
+		ctag->acceptSerializer("test", &engine);
+		cout << engine.getJsonStr(false) << endl;
+
+		std::string str = R"({ "test":{"array": [14,32,45,87,98] ,"int" : 32,"str" : "Hello JSON","test" : "test from tags"} })";
+		named_tags::JsonDeserializer des{ str };
+
+		ctag->acceptSerializer("test", &des);
+
 		ctag->acceptSerializer("test", &engine);
 		cout << engine.getJsonStr(false) << endl;
 	}
